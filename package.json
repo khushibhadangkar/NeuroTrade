@@ -1,0 +1,23 @@
+{
+  "name": "neurotrade-os",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered stock market prediction platform — LSTM neural network forecasting with an immersive fintech frontend.",
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "npm run dev --prefix neurotrade-os",
+    "dev:backend": "cd stock-prediction-frontend/api && NEUROTRADE_PORT=5001 python app.py",
+    "build": "npm run build --prefix neurotrade-os",
+    "start": "npm run start --prefix neurotrade-os",
+    "type-check": "npm run type-check --prefix neurotrade-os",
+    "lint": "npm run lint --prefix neurotrade-os",
+    "setup": "npm install --prefix neurotrade-os && pip install -r stock-prediction-frontend/api/requirements.txt",
+    "clean": "rm -rf neurotrade-os/.next neurotrade-os/node_modules/.cache"
+  },
+  "keywords": ["stock-prediction", "lstm", "ai", "fintech", "nextjs", "flask"],
+  "author": "NeuroTrade",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
