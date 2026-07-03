@@ -22,7 +22,7 @@ const API_CONFIG = {
   baseUrl:
     typeof window === "undefined"
       ? (process.env.NEUROTRADE_API_URL ?? "http://127.0.0.1:5001")
-      : (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:5001"),
+      : "/api/backend",
   /** Request timeout in ms */
   timeout: 120_000, // 2 min — LSTM training is slow
   /** Max retry attempts for transient failures */

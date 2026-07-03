@@ -20,7 +20,6 @@ import pandas as pd
 from core.config import get_app_config, get_model_config
 from core.logging_setup import get_logger, log_context, timed
 from data.data_fetching import get_stock_data
-from model_training.pipeline import run_pipeline
 from utils.data_analysis_and_visualization import main_analysis
 from utils.trend_signals import calculate_trend_signals
 
@@ -192,6 +191,7 @@ def run_prediction(symbols: list[str]) -> dict[str, Any]:
 
             try:
                 with timed(logger, "predict_symbol", symbol=symbol):
+                    from model_training.pipeline import run_pipeline
                     forecast_df, metrics, extra = run_pipeline(symbol, raw_data=stock_data, config=config)
 
                 technical = calculate_trend_signals(forecast_df, stock_data)
