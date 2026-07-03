@@ -134,6 +134,7 @@ class AppConfig:
         default_factory=lambda: _env_list(
             "NEUROTRADE_CORS_ORIGINS",
             (
+                "*",
                 "http://localhost:3000",
                 "http://localhost:3003",
                 "http://127.0.0.1:3000",
