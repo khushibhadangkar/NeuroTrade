@@ -75,8 +75,10 @@ yarn-error.log*
 venv/
 
 # Next.js
-neurotrade-os/.next/
+.next/
+*.tsbuildinfo
 
 # Results (generated artifacts)
 stock-prediction-frontend/api/results/
 results/
+

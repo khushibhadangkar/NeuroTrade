@@ -1,8 +1,8 @@
 {
   "framework": "nextjs",
-  "buildCommand": "npm run build --prefix neurotrade-os",
-  "installCommand": "npm install --prefix neurotrade-os",
-  "outputDirectory": "neurotrade-os/.next",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": ".next",
   "headers": [
     {
       "source": "/(.*)",
