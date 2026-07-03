@@ -29,6 +29,8 @@ const API_CONFIG = {
   maxRetries: 2,
   /** Base delay between retries in ms */
   retryDelay: 1000,
+  /** Bypass tunnel warning for local dev tunnels */
+  bypassHeader: "true",
 } as const;
 
 // ─── Error Types ──────────────────────────────────────────────────────────
@@ -142,12 +144,14 @@ class ApiClient {
 
     try {
       const res = await fetch(`${this.baseUrl}${path}`, {
+        ...init,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          "Bypass-Tunnel-Reminder": "true",
+          ...init?.headers,
         },
         signal: controller.signal,
-        ...init,
       });
 
       clearTimeout(timeoutId);

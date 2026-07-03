@@ -127,7 +127,10 @@ export async function fetchUniversalForecast(
     const res = await fetch(
       `${BASE}/forecast/${encodeURIComponent(symbol.toUpperCase())}`,
       {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Bypass-Tunnel-Reminder": "true",
+        },
         signal: controller.signal,
       }
     );

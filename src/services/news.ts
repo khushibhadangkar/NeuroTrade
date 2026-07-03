@@ -22,7 +22,10 @@ export interface NewsItem {
 export async function fetchMarketNews(): Promise<NewsItem[]> {
   try {
     const res = await fetch(`${BASE}/market/news`, {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Bypass-Tunnel-Reminder": "true",
+      },
     });
     if (!res.ok) return [];
     const data = await res.json();

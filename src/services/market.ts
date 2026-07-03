@@ -51,7 +51,10 @@ export interface MarketOverview {
 
 async function marketFetch<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Bypass-Tunnel-Reminder": "true",
+    },
   });
   if (!res.ok) {
     throw new Error(`Market data request failed: ${res.status}`);
