@@ -1,7 +1,3 @@
-# ─── NeuroTrade OS — Production Backend ────────────────────────────────────
-# Multi-stage build for the Flask API backend.
-# Deploy to Railway, Render, or any Docker-compatible platform.
-
 FROM python:3.11-slim AS base
 
 WORKDIR /app
@@ -12,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Python dependencies
-COPY stock-prediction-frontend/api/requirements.txt ./requirements.txt
+COPY requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Application code
@@ -20,7 +16,7 @@ COPY core/ ./core/
 COPY data/ ./data/
 COPY model_training/ ./model_training/
 COPY utils/ ./utils/
-COPY stock-prediction-frontend/api/ ./stock-prediction-frontend/api/
+COPY api/ ./api/
 
 # Create results directory
 RUN mkdir -p ./results/runs
@@ -40,4 +36,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 
 EXPOSE 5001
 
-CMD ["python", "stock-prediction-frontend/api/app.py"]
+CMD ["python", "api/app.py"]

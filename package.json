@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:frontend": "next dev --port 3010",
-    "dev:backend": "cd stock-prediction-frontend/api && NEUROTRADE_PORT=5001 python app.py",
+    "dev:backend": "cd backend && NEUROTRADE_PORT=5001 python api/app.py",
     "build": "next build",
     "start": "next start --port 3010",
     "type-check": "tsc --noEmit",
     "lint": "next lint",
-    "setup": "npm install && pip install -r stock-prediction-frontend/api/requirements.txt",
+    "setup": "npm install && pip install -r backend/requirements.txt",
     "clean": "rm -rf .next node_modules/.cache"
   },
   "keywords": [

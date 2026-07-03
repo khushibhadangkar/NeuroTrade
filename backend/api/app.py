@@ -33,7 +33,7 @@ matplotlib.use("Agg")  # set non-interactive backend before any pyplot import
 # a hyphen, so we expose ``services.py`` by adding the API directory to
 # ``sys.path`` rather than referring to it as a package.
 _API_DIR = Path(__file__).resolve().parent
-_REPO_ROOT = _API_DIR.parent.parent
+_REPO_ROOT = _API_DIR.parent
 for _path in (str(_REPO_ROOT), str(_API_DIR)):
     if _path not in sys.path:
         sys.path.insert(0, _path)
