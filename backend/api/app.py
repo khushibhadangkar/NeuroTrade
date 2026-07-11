@@ -55,7 +55,10 @@ from services import (  # type: ignore[import-not-found]  # noqa: E402
     resolve_result_file,
     run_prediction,
 )
-
+from market_data import fetch_market_overview, fetch_indices, fetch_quote, fetch_equity_quotes, fetch_commodities, INDICES, EQUITIES, COMMODITIES
+from technicals import compute_technicals
+from news import fetch_market_news
+from forecast_engine import generate_forecast
 
 # ---------------------------------------------------------------------------
 # Bootstrap
@@ -191,7 +194,6 @@ def _build_app() -> Flask:
     @app.route("/market/overview", methods=["GET"])
     def market_overview() -> Response:
         """Full market overview — indices, gainers, losers, commodities."""
-        from market_data import fetch_market_overview
         data = fetch_market_overview()
         data["request_id"] = getattr(g, "request_id", None)
         return jsonify(data)
@@ -199,13 +201,11 @@ def _build_app() -> Flask:
     @app.route("/market/indices", methods=["GET"])
     def market_indices() -> Response:
         """Live Indian index quotes."""
-        from market_data import fetch_indices
         return jsonify({"indices": fetch_indices(), "request_id": getattr(g, "request_id", None)})
 
     @app.route("/market/quote/<symbol>", methods=["GET"])
     def market_quote(symbol: str) -> Response:
         """Single symbol quote."""
-        from market_data import fetch_quote, INDICES, EQUITIES, COMMODITIES
         # Resolve symbol to yfinance ticker
         yf_symbol = INDICES.get(symbol.upper()) or EQUITIES.get(symbol.upper()) or COMMODITIES.get(symbol.upper()) or symbol
         quote = fetch_quote(yf_symbol)
@@ -217,7 +217,6 @@ def _build_app() -> Flask:
     @app.route("/market/equities", methods=["GET"])
     def market_equities() -> Response:
         """Top Indian equity quotes."""
-        from market_data import fetch_equity_quotes
         symbols = request.args.get("symbols")
         symbol_list = [s.strip().upper() for s in symbols.split(",")] if symbols else None
         return jsonify({"equities": fetch_equity_quotes(symbol_list), "request_id": getattr(g, "request_id", None)})
@@ -225,14 +224,11 @@ def _build_app() -> Flask:
     @app.route("/market/commodities", methods=["GET"])
     def market_commodities() -> Response:
         """Commodity prices in INR."""
-        from market_data import fetch_commodities
         return jsonify({"commodities": fetch_commodities(), "request_id": getattr(g, "request_id", None)})
 
     @app.route("/market/technicals/<symbol>", methods=["GET"])
     def market_technicals(symbol: str) -> Response:
         """Full technical analysis for a symbol."""
-        from technicals import compute_technicals
-        from market_data import INDICES, EQUITIES, COMMODITIES
         yf_symbol = INDICES.get(symbol.upper()) or EQUITIES.get(symbol.upper()) or COMMODITIES.get(symbol.upper()) or symbol
         result = compute_technicals(yf_symbol)
         if result is None:
@@ -245,7 +241,6 @@ def _build_app() -> Flask:
     @app.route("/market/news", methods=["GET"])
     def market_news() -> Response:
         """Real financial news with sector mapping and sentiment."""
-        from news import fetch_market_news
         news = fetch_market_news()
         return jsonify({"news": news, "count": len(news), "request_id": getattr(g, "request_id", None)})
 
@@ -260,7 +255,6 @@ def _build_app() -> Flask:
         price, technical analysis, probabilistic outlook, asset-aware
         narrative, key drivers, and relevant themes.
         """
-        from forecast_engine import generate_forecast
         result = generate_forecast(symbol)
         if result is None:
             return _error_response(
