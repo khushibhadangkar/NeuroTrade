@@ -10,7 +10,7 @@
 
 const BASE =
   typeof window === "undefined"
-    ? (process.env.NEUROTRADE_API_URL ?? "http://127.0.0.1:5001")
+    ? (process.env.NODE_ENV === "development" ? (process.env.NEUROTRADE_API_URL ?? "http://127.0.0.1:5001") : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/backend` : "/api/backend"))
     : "/api/backend";
 
 // ─── Types ────────────────────────────────────────────────────────────────
