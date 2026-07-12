@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/**/*.py": {
+      "includeFiles": "backend/**"
+    }
+  },
   "installCommand": "npm install --legacy-peer-deps",
   "rewrites": [
     {
