@@ -1,155 +1,383 @@
-# NeuroTrade OS
+<div align="center">
 
-> An interactive dashboard and machine learning pipeline for forecasting Indian equities.
+# 🧠 NeuroTrade OS
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-000000.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-14.2-000000?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-000000?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Flask](https://img.shields.io/badge/Flask-2.2-000000?style=flat-square&logo=flask)](https://flask.palletsprojects.com/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.6-000000?style=flat-square&logo=tensorflow)](https://www.tensorflow.org/)
+### AI-Powered Stock Market Forecasting & Financial Intelligence Platform
 
-[Demo](https://neurotrade.example.com) • [Docs](docs/API.md) • [Architecture](docs/ARCHITECTURE.md) • [Tech Stack](#3-how-does-it-work) • [License](#license)
+An end-to-end financial analytics platform that combines **deep learning**, **technical analysis**, and **interactive data visualization** to forecast stock prices and provide actionable market insights.
 
-![NeuroTrade OS Dashboard](docs/screenshots/desktop_dashboard.png)
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Python](https://img.shields.io/badge/Python-3.11-yellow?logo=python)
+![Flask](https://img.shields.io/badge/Flask-API-black?logo=flask)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-LSTM-orange?logo=tensorflow)
+![License](https://img.shields.io/badge/License-MIT-green)
 
----
-
-### 1. What is it?
-
-NeuroTrade OS is an interactive dashboard that fetches real-time market data, calculates technical indicators, and runs deep learning pipelines to forecast price movements.
-
-| Core Feature | Technical Implementation |
-| :--- | :--- |
-| **LSTM Forecasting** | Stacked LSTM neural network (128 → 64 → 32 → 1) trained on historical OHLC data. |
-| **Regime Probabilities** | Scored likelihoods for bullish, bearish, and consolidation trends. |
-| **Technical Analysis** | Calculations for RSI, MACD, EMA alignments, and support/resistance zones. |
-| **Macro Intelligence** | Global commodities price tracking and sector news sentiment mapping. |
-| **Asset Comparison** | Side-by-side terminal for tracking and aligning multiple assets concurrently. |
+</div>
 
 ---
 
-### 2. Why was it built?
+# Overview
 
-* **The Problem:** Stock analysis tools are typically split between oversimplified retail interfaces or complex, text-only backend scripts that lack interactive visualizations.
-* **The Solution:** NeuroTrade OS bridges this gap by unifying raw market telemetry, deep learning sequence modeling, and interactive WebGL-powered widgets in a single dashboard.
+NeuroTrade OS is a full-stack AI application that predicts stock market trends using a custom LSTM forecasting pipeline while providing institutional-style financial analytics through an interactive web interface.
+
+The project combines machine learning, financial data processing, REST APIs, and modern frontend technologies into a unified platform capable of analyzing historical market data, generating forecasts, and visualizing technical indicators.
 
 ---
 
-### 3. How does it work?
+# Features
 
-#### System Architecture
-```mermaid
-graph LR
-    User[Browser Client] -->|Next.js App| Frontend[Next.js Client]
-    Frontend -->|API Rewrite /api/backend| Backend[Flask API]
-    Backend -->|yfinance| Market[Yahoo Finance API]
-    Backend -->|TensorFlow| LSTM[LSTM Model Pipeline]
-    Backend -->|Technicals| Engine[Indicator Engine]
-```
+### AI Forecasting
+- LSTM-based time series prediction
+- Multi-day price forecasting
+- Model performance metrics
+- Trend probability estimation
 
-#### Tech Stack
-* **Frontend:** Next.js 14, TypeScript, Zustand, TanStack Query, Three.js (React Three Fiber), Tailwind CSS
-* **Backend:** Python, Flask, Pandas, NumPy, yfinance
-* **Machine Learning:** TensorFlow, Keras, Scikit-Learn
+### Technical Analysis
+- Moving Averages
+- RSI
+- Volume Analysis
+- Trend Detection
+- Support & Resistance Levels
+- Market Momentum Analysis
 
-#### Folder Structure
+### Market Intelligence Dashboard
+- Interactive financial charts
+- Stock comparison
+- Watchlist management
+- Forecast visualization
+- Institutional-style dashboard
+
+### Backend Services
+- RESTful Flask API
+- Model inference endpoints
+- Data preprocessing pipeline
+- Financial data collection
+- Prediction artifact generation
+
+---
+
+# Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Frontend | Next.js 14, React 18, TypeScript |
+| Styling | Tailwind CSS |
+| Animation | Framer Motion |
+| Visualization | Recharts, Lightweight Charts, Three.js, React Three Fiber |
+| State Management | Zustand |
+| Data Fetching | TanStack Query |
+| Backend | Python, Flask |
+| Machine Learning | TensorFlow, Keras |
+| Data Science | NumPy, Pandas, Scikit-Learn |
+| Financial Data | Yahoo Finance (yFinance) |
+| Deployment | Vercel, Docker |
+
+---
+
+# System Architecture
+
 ```text
-neurotrade-os/
-├── backend/                   # Python API and model logic
-│   ├── api/                   # Controllers, app.py, services.py
-│   ├── core/                  # Configurations, telemetry, and errors
-│   ├── model_training/        # 8-stage sequence pipeline (load -> evaluate)
-│   └── utils/                 # Technical indicators and signal math
-└── src/                       # Frontend source
-    ├── app/                   # App Router pages and layouts
-    ├── components/            # Visualizers, charts, and layout components
-    └── store/                 # Zustand state stores
+                    +-----------------------+
+                    |    Next.js Frontend   |
+                    |  React + TypeScript   |
+                    +----------+------------+
+                               |
+                         REST API Calls
+                               |
+                               ▼
+                  +-------------------------+
+                  |      Flask Backend      |
+                  | Prediction API Layer    |
+                  +-----------+-------------+
+                              |
+      +-----------------------+----------------------+
+      |                                              |
+      ▼                                              ▼
+Market Data Pipeline                         AI Prediction Engine
+(yFinance, Pandas)                       TensorFlow LSTM Model
+      |                                              |
+      +-----------------------+----------------------+
+                              |
+                              ▼
+                    Technical Analysis Engine
+                              |
+                              ▼
+                    Forecast & Analytics API
+                              |
+                              ▼
+                     Interactive Dashboard
 ```
 
 ---
 
-### 4. How do I run it?
+# Machine Learning Pipeline
 
-#### 1. Clone the repository
+```text
+Historical Market Data
+          │
+          ▼
+ Data Cleaning & Processing
+          │
+          ▼
+ Feature Engineering
+          │
+          ▼
+ Data Normalization
+          │
+          ▼
+Sequence Generation
+          │
+          ▼
+ Stacked LSTM Network
+          │
+          ▼
+ Future Price Prediction
+          │
+          ▼
+ Performance Evaluation
+          │
+          ▼
+ REST API Response
+```
+
+---
+
+# Project Structure
+
+```text
+NeuroTrade/
+│
+├── src/                          # Next.js frontend
+│   ├── app/
+│   ├── components/
+│   ├── hooks/
+│   ├── services/
+│   ├── store/
+│   └── lib/
+│
+├── stock-prediction-frontend/
+│   └── api/                      # Flask backend
+│
+├── model_training/
+│   ├── pipeline.py
+│   └── model_training_and_prediction.py
+│
+├── data/
+│   └── data_fetching.py
+│
+├── utils/
+│   ├── risk_analysis.py
+│   ├── trend_signals.py
+│   └── visualization.py
+│
+├── core/
+│   ├── config.py
+│   ├── logging.py
+│   └── errors.py
+│
+├── docs/
+│   ├── API.md
+│   ├── ARCHITECTURE.md
+│   └── DEPLOYMENT.md
+│
+└── deployment/
+    ├── Dockerfile
+    ├── Procfile
+    └── vercel.json
+```
+
+---
+
+# Application Flow
+
+```mermaid
+flowchart TD
+
+A[User] --> B[Next.js Dashboard]
+
+B --> C[Flask API]
+
+C --> D[Validate Request]
+
+D --> E[Download Market Data]
+
+E --> F[Feature Engineering]
+
+F --> G[LSTM Prediction]
+
+G --> H[Technical Analysis]
+
+H --> I[Generate Forecast]
+
+I --> J[Return JSON]
+
+J --> K[Interactive Charts]
+```
+
+---
+
+# REST API
+
+## Health Check
+
+```
+GET /health
+```
+
+Returns application status.
+
+---
+
+## Stock Prediction
+
+```
+POST /predict
+```
+
+Example request
+
+```json
+{
+  "symbols": ["AAPL", "NVDA"]
+}
+```
+
+Example response
+
+```json
+{
+  "predictions": {},
+  "technical_analysis": {},
+  "metrics": {},
+  "request_id": "..."
+}
+```
+
+---
+
+# Core Components
+
+## Frontend
+
+- Dashboard
+- Landing Page
+- Forecast Workspace
+- Stock Comparison
+- Watchlist
+- Interactive Charts
+- 3D Visual Components
+
+---
+
+## Backend
+
+- Prediction API
+- Technical Analysis Engine
+- Data Processing Pipeline
+- Forecast Generation
+- Artifact Storage
+- Error Handling
+- Logging
+
+---
+
+## Machine Learning
+
+- Time Series Forecasting
+- LSTM Neural Network
+- Feature Engineering
+- Model Evaluation
+- Performance Metrics
+
+---
+
+# Performance Metrics
+
+The forecasting model reports:
+
+- Root Mean Squared Error (RMSE)
+- Mean Absolute Error (MAE)
+- R² Score
+- Directional Accuracy
+- Normalized RMSE
+
+---
+
+# Installation
+
+### Clone Repository
+
 ```bash
-git clone https://github.com/khushibhadangkar/NeuroTrade.git
-cd NeuroTrade
+git clone https://github.com/USERNAME/neurotrade.git
+cd neurotrade
 ```
 
-#### 2. Run setup automation
+### Install Frontend
+
 ```bash
-npm run setup
-```
-*This installs both Next.js npm dependencies and backend pip requirements.*
-
-#### 3. Define environment variables
-Create a `.env` file in the root:
-```env
-PORT=3010
-NEUROTRADE_API_URL=http://localhost:5001
+npm install
 ```
 
-Create a `.env` file in the `backend/` folder:
-```env
-NEUROTRADE_HOST=0.0.0.0
-NEUROTRADE_PORT=5001
-NEUROTRADE_DEBUG=false
-NEUROTRADE_CORS_ORIGINS=http://localhost:3010
+### Install Backend
+
+```bash
+pip install -r stock-prediction-frontend/api/requirements.txt
 ```
 
-#### 4. Start development servers
+### Start Development
+
 ```bash
 npm run dev
 ```
-*Launches Next.js on `http://localhost:3010` and Flask on `http://localhost:5001` concurrently.*
 
 ---
 
-### API Specifications
+# Technologies Used
 
-#### `GET /forecast/<symbol>`
-Retrieves dynamic technical regimes and probabilities in real-time.
-- **Request:** `GET /forecast/nifty`
-- **Response (200 OK):**
-```json
-{
-  "symbol": "^NSEI",
-  "real_time_price": 24200.15,
-  "probabilistic_outlook": {
-    "bullish_probability": 65,
-    "bearish_probability": 15,
-    "consolidation_probability": 20
-  }
-}
-```
+### Frontend
 
-#### `POST /predict`
-Executes on-demand sequence model training and evaluation.
-- **Request:** `{"symbols": ["SBIN"]}`
-- **Response (200 OK):**
-```json
-{
-  "predictions": {
-    "SBIN": [{ "date": "2026-07-15", "actual": 845.20, "predicted": 841.10 }]
-  },
-  "metrics": {
-    "SBIN": { "rmse": 3.84, "directional_accuracy": 62.45 }
-  }
-}
-```
+- Next.js 14
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Three.js
+- React Three Fiber
+- Zustand
+- TanStack Query
+- Recharts
+
+### Backend
+
+- Flask
+- Python
+- TensorFlow
+- Keras
+- Pandas
+- NumPy
+- Scikit-Learn
+- yFinance
 
 ---
 
-### Performance
+# Future Improvements
 
-| Metric | Measured Value | Implementation |
-| :--- | :--- | :--- |
-| **API Response Latency** | **85ms** | Offloaded Keras LSTM model execution from main request paths. |
-| **Initial Bundle Size** | **32% reduction (~420KB)** | Dynamic loading (`next/dynamic`) of Canvas and graphing components. |
-| **Upstream Network Hits** | **74% reduction** | TanStack Query cache layer with a 10,000ms quote staleTime. |
-| **Data Preprocessing** | **<4.5ms** | Optimized Pandas series conversion and MinMaxScaler operations. |
+- User authentication
+- Portfolio tracking
+- Real-time WebSocket updates
+- News sentiment analysis
+- Transformer-based forecasting models
+- Reinforcement learning strategies
+- Cloud deployment pipeline
+- Model versioning
 
 ---
+
+# Disclaimer
+
+This project is intended for educational and research purposes only. Forecasts generated by the model should not be considered financial advice.
+
 
 ### License
 
